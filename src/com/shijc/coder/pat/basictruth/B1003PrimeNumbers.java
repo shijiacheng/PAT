@@ -1,5 +1,6 @@
 package com.shijc.coder.pat.basictruth;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -22,11 +23,47 @@ import java.util.Scanner;
  * @date 2018/1/23
  */
 public class B1003PrimeNumbers {
-    public static void main(String[] args){
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int M = sc.nextInt();
         int N = sc.nextInt();
-        int[] array = new int[N];
+
+        List<Integer> list = new ArrayList<>();
+        for (int a = 2; a < Integer.MAX_VALUE; a++) {
+            int temp = (int) Math.sqrt(a);
+            if (a == 2 || a==3) {
+                list.add(a);
+            } else {
+                for (int i = 2; i <= temp; i++) {
+                    if (a % i == 0) {
+                        break;
+                    }
+                    if (i >= temp) {
+                        list.add(a);
+                    }
+                }
+            }
+            if (list.size() == N + M) {
+                break;
+            }
+        }
+
+        int temp = 1;
+        for (int i = M; i <= N; i++) {
+            if (temp % 10 == 0){
+                temp =1;
+                System.out.println(list.get(i-1));
+            }else {
+                temp++;
+                if (i == N){
+                    System.out.print(list.get(i-1));
+                }else {
+                    System.out.print(list.get(i-1)+" ");
+                }
+
+            }
+        }
 
     }
+
 }
